@@ -8,6 +8,7 @@ import com.willfp.eco.core.data.keys.PersistentDataKeyType
 import com.willfp.eco.core.data.profile
 import com.willfp.eco.core.gui.menu.Menu
 import com.willfp.eco.core.gui.onLeftClick
+import com.willfp.eco.core.gui.onRightClick
 import com.willfp.eco.core.gui.slot
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.modify
@@ -76,6 +77,15 @@ class Quest(
                 )
             }
 
+            if (hasActive(player)) {
+                addLoreLines(
+                    addPlaceholdersInto(
+                        plugin.configYml.getStrings("quests.icon.click-to-cancel-lore"),
+                        player
+                    )
+                )
+            }
+
             setDisplayName(
                 addPlaceholdersInto(
                     listOf(plugin.configYml.getString("quests.icon.name")),
@@ -86,6 +96,9 @@ class Quest(
     }) {
         onLeftClick { player, _, _, menu ->
             tryStartFromGui(player, menu)
+        }
+        onRightClick { player, _, _, menu ->
+            tryCancelFromGui(player, menu)
         }
     }
 
@@ -250,25 +263,25 @@ class Quest(
             }
         }.register()
 
-        for (i in 1..this.tasks.size+1) {
+        for (i in 1..this.tasks.size + 1) {
             PlayerPlaceholder(plugin, "quest_${id}_task_${i}_required_xp") {
-                this.tasks[i-1].getExperienceRequired(it).toNiceString()
+                this.tasks[i - 1].getExperienceRequired(it).toNiceString()
             }.register()
 
             PlayerPlaceholder(plugin, "quest_${id}_task_${i}_xp") {
-                this.tasks[i-1].getExperience(it).toNiceString()
+                this.tasks[i - 1].getExperience(it).toNiceString()
             }.register()
 
             PlayerPlaceholder(plugin, "quest_${id}_task_${i}_description") {
-                this.tasks[i-1].getDescription(it)
+                this.tasks[i - 1].getDescription(it)
             }.register()
 
             PlayerPlaceholder(plugin, "quest_${id}_task_${i}_completed") {
-                this.tasks[i-1].hasCompleted(it).toNiceString()
+                this.tasks[i - 1].hasCompleted(it).toNiceString()
             }.register()
 
             PlayerPlaceholder(plugin, "quest_${id}_task_${i}_completed_description") {
-                this.tasks[i-1].getCompletedDescription(it)
+                this.tasks[i - 1].getCompletedDescription(it)
             }.register()
         }
     }
@@ -355,6 +368,31 @@ class Quest(
 
         player.sendMessage(
             plugin.langYml.getMessage("started-quest-self")
+                .replace("%quest%", name)
+        )
+
+        menu.refresh(player)
+    }
+
+    fun tryCancelFromGui(player: Player, menu: Menu) {
+        if (!plugin.configYml.getBool("gui.click-to-start")) {
+            return
+        }
+
+        if (hasCompleted(player)) {
+            player.sendMessage(plugin.langYml.getMessage("cannot-cancel-completed"))
+            return
+        }
+
+        if (!hasStarted(player)) {
+            player.sendMessage(plugin.langYml.getMessage("not-started"))
+            return
+        }
+
+        reset(player)
+
+        player.sendMessage(
+            plugin.langYml.getMessage("cancelled-quest-self")
                 .replace("%quest%", name)
         )
 
