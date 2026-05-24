@@ -89,11 +89,13 @@ class EcoQuestsPlugin : LibreforgePlugin() {
 
     override fun createTasks() {
         val scanInterval = this.configYml.getInt("scan-interval").toLong()
-        this.scheduler.runTimer(scanInterval, scanInterval) {
-            for (quest in Quests.values()) {
-                for (player in Bukkit.getOnlinePlayers()) {
-                    if (quest.shouldStart(player)) {
-                        quest.start(player)
+        if (scanInterval > 0) {
+            this.scheduler.runTimer(scanInterval, scanInterval) {
+                for (quest in Quests.values()) {
+                    for (player in Bukkit.getOnlinePlayers()) {
+                        if (quest.shouldStart(player)) {
+                            quest.start(player)
+                        }
                     }
                 }
             }
