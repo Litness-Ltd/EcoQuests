@@ -1,27 +1,30 @@
 package com.willfp.ecoquests.gui.components
 
 import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.gui.onLeftClick
 import com.willfp.eco.core.gui.slot
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.modify
 import com.willfp.eco.util.formatEco
-import com.willfp.ecoquests.gui.PreviousQuestsGUI
+import org.bukkit.Material
 
 class QuestInfoComponent(
     config: Config
 ) : PositionedComponent {
     private val baseItem = Items.lookup(config.getString("item"))
 
-    private val slot = slot({ player, _ ->
-        baseItem.item.clone().modify {
+    private val slot = slot { player, _ ->
+        var item = baseItem.item.clone().modify {
             setDisplayName(config.getString("name").formatEco(player, formatPlaceholders = true))
             addLoreLines(config.getStrings("lore").formatEco(player, formatPlaceholders = true))
         }
-    }) {
-        onLeftClick { player, _, _, _ ->
-            PreviousQuestsGUI.open(player)
+
+        if (item.type == Material.PLAYER_HEAD) {
+            val skullMeta = item.itemMeta as? org.bukkit.inventory.meta.SkullMeta
+            skullMeta?.playerProfile = player.playerProfile
+            item.itemMeta = skullMeta
         }
+
+        return@slot item
     }
 
     override val row: Int = config.getInt("location.row")
