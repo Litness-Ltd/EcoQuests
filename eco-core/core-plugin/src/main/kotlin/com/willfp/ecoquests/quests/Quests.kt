@@ -27,6 +27,7 @@ object Quests : ConfigCategory("quest", "quests") {
         return values()
             .filter { it.showsInGui }
             .filter { it.hasActive(player) || (it.alwaysInGUI && !it.hasCompleted(player)) }
+            .sortedWith(compareByDescending<Quest> { it.hasActive(player) }.thenBy { it.name })
     }
 
     fun getActiveQuests(player: Player): List<Quest> {
@@ -43,6 +44,7 @@ object Quests : ConfigCategory("quest", "quests") {
         return values()
             .filter { it.showsInGui }
             .filter { it.hasCompleted(player) }
+            .sortedWith(compareBy<Quest> { it.getTimeSinceCompletion(player) }.thenBy { it.name })
     }
 }
 

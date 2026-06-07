@@ -36,6 +36,9 @@ object QuestsGUI {
             )
 
             addComponent(QuestInfoComponent(plugin.configYml.getSubsection("gui.quest-info")))
+            addComponent(QuestInfoComponent(plugin.configYml.getSubsection("gui.quest-info2")))
+            addComponent(QuestInfoComponent(plugin.configYml.getSubsection("gui.quest-info3")))
+            addComponent(QuestInfoComponent(plugin.configYml.getSubsection("gui.quest-info4")))
 
             addComponent(CloseButton(plugin.configYml.getSubsection("gui.close")))
 
