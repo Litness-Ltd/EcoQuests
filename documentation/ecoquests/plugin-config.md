@@ -19,7 +19,7 @@ use-local-storage: false
 scan-interval: 20 # How often to scan for quests auto-starting (in ticks)
 
 gui:
-  title: "Quest Book" # Title of the /quests GUI
+  title: "Quest Book (Page %page%/%max_page%)" # Title of the /quests GUI. Supports %page% and %max_page% placeholders
 
   rows: 6 # Number of rows in the GUI
 
@@ -66,15 +66,23 @@ gui:
 
   prev-page: # Previous-page button
     item: arrow name:"&fPrevious Page"
+    item-inactive: gray_dye name:"&7Previous Page"
     location:
       row: 6
       column: 4
 
   next-page: # Next-page button
     item: arrow name:"&fNext Page"
+    item-inactive: gray_dye name:"&7Next Page"
     location:
       row: 6
       column: 6
+
+  page-change-sound:
+    enabled: true
+    sound: ui.button.click
+    pitch: 1.0
+    volume: 1.0
 
   close: # Close button
     item: barrier
@@ -83,11 +91,11 @@ gui:
       row: 6
       column: 5
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages
   custom-slots: [ ]
 
 completed-gui: # The GUI listing quests the player has finished
-  title: "Completed Quests" # Title of the completed-quests GUI
+  title: "Completed Quests (Page %page%/%max_page%)" # Title of the completed-quests GUI. Supports %page% and %max_page% placeholders
 
   rows: 6 # Number of rows in the GUI
 
@@ -114,15 +122,23 @@ completed-gui: # The GUI listing quests the player has finished
 
   prev-page: # Previous-page button
     item: arrow name:"&fPrevious Page"
+    item-inactive: gray_dye name:"&7Previous Page"
     location:
       row: 6
       column: 4
 
   next-page: # Next-page button
     item: arrow name:"&fNext Page"
+    item-inactive: gray_dye name:"&7Next Page"
     location:
       row: 6
       column: 6
+
+  page-change-sound:
+    enabled: true
+    sound: ui.button.click
+    pitch: 1.0
+    volume: 1.0
 
   back: # Button returning to the main quest book
     item: arrow name:"&fBack"
@@ -130,7 +146,7 @@ completed-gui: # The GUI listing quests the player has finished
       row: 6
       column: 1
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages
   custom-slots: [ ]
 
 tasks: # How a task line renders inside a quest icon
@@ -141,6 +157,10 @@ quests:
   icon: # How each quest renders in the GUI
     name: "&e%quest%" # The name of the icon
     line-wrap: 32 # Wrap lore lines at this character width
+    # Available placeholders: %quest%, %category%, %description%, %tasks%, %rewards%,
+    # %time_since%, %time_until_reset%
+    # %category% returns the category display name, or an empty string if the quest has no category.
+    # %tasks% and %rewards% expand into multiple lines; all others are single-line.
     lore: # Icon lore; supports quest placeholders
       - "%description%"
       - ""
@@ -213,6 +233,6 @@ quests:
 ## Where to go next
 
 - **Make a quest:** [How to make a quest](how-to-make-a-quest) covers the per-quest config files.
-- **GUI item references:** the `item` fields use the [Item Lookup System](https://plugins.auxilor.io/the-item-lookup-system).
-- **Custom GUI slots:** read the [custom GUI slots how-to](https://plugins.auxilor.io/all-plugins/custom-gui-slots).
+- **GUI item references:** the `item` fields use the [Item Lookup System](https://hub.auxilor.io/wiki/eco/the-item-lookup-system-the-item-lookup-system).
+- **Custom GUI slots:** read the [custom GUI slots how-to](https://hub.auxilor.io/wiki/eco/pages).
 

@@ -19,7 +19,7 @@ A **quest** is a goal made up of one or more **tasks**; when a player finishes e
 
 ## Naming and IDs
 
-The file name without `.yml` is the quest ID; it's what you use in commands and placeholders. Items referenced anywhere in the file (e.g. the GUI icon) use the [Item Lookup System](https://plugins.auxilor.io/the-item-lookup-system).
+The file name without `.yml` is the quest ID; it's what you use in commands and placeholders. Items referenced anywhere in the file (e.g. the GUI icon) use the [Item Lookup System](https://hub.auxilor.io/wiki/eco/the-item-lookup-system-the-item-lookup-system).
 
 :::warning ID rules
 IDs may only contain lowercase letters, numbers, and underscores (a-z, 0-9, _). No spaces, capitals, or hyphens, or the quest will not load.
@@ -30,6 +30,7 @@ IDs may only contain lowercase letters, numbers, and underscores (a-z, 0-9, _). 
 | Part | What it controls |
 | --- | --- |
 | **Quest info** | The name, description, and reset timer |
+| **Category** | The optional category this quest belongs to |
 | **Tasks** | The goals players complete and their XP requirements |
 | **Rewards** | What the player gets when the quest completes |
 | **Quest start** | When and how the quest begins |
@@ -40,6 +41,9 @@ IDs may only contain lowercase letters, numbers, and underscores (a-z, 0-9, _). 
 name: "Traveller" # Shown in the GUI and the %quest% placeholder
 description: "&7Stretch your legs! Walk around The Nether and find new places to explore."
 reset-time: -1 # Minutes between resets; -1 disables. 1 day: 1440, 1 week: 10080, 1 month: 43200
+
+# === Category: optional grouping ===
+category: easy # The ID of a category file in /categories/; omit if not using categories
 
 # === Tasks: the goals and their XP requirements ===
 tasks:
@@ -82,6 +86,16 @@ description: "&7Stretch your legs! Walk around The Nether and find new places to
 reset-time: -1 # Minutes between resets; -1 disables. 1 day: 1440, 1 week: 10080, 1 month: 43200
 ```
 
+### Category
+
+Assign the quest to a category so it counts toward category completion. The value must match a file name (without `.yml`) in the `/categories/` folder.
+
+```yaml
+category: easy # Omit this line if the quest does not belong to a category
+```
+
+See [How to make a category](how-to-make-a-category) for the full category setup.
+
 ### Tasks
 
 The list of tasks the player must complete, each with the XP needed to finish it.
@@ -113,8 +127,8 @@ rewards: # Effects run when the quest completes
 :::danger Effects are their own system
 `rewards`, `start-effects`, and `start-conditions` all run on the effect and condition system, which is shared across every eco plugin and documented separately.
 
-- [Configuring an Effect](https://plugins.auxilor.io/effects/configuring-an-effect)
-- [Configuring an Effect Chain](https://plugins.auxilor.io/effects/configuring-a-chain)
+- [Configuring an Effect](https://hub.auxilor.io/wiki/libreforge/configuring-an-effect)
+- [Configuring an Effect Chain](https://hub.auxilor.io/wiki/libreforge/configuring-a-chain)
 :::
 
 ### Quest start
@@ -154,5 +168,6 @@ gui:
 ## Where to go next
 
 - **Build the goals:** [How to make a task](how-to-make-a-task) covers the tasks a quest references.
+- **Group quests:** [How to make a category](how-to-make-a-category) covers grouping quests and rewarding category completion.
 - **Default examples:** the shipped quest configs are [here](https://github.com/Auxilor/EcoQuests/tree/master/eco-core/core-plugin/src/main/resources/quests).
 - **Community configs:** browse and import more on [lrcdb](https://lrcdb.auxilor.io/).

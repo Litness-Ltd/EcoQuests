@@ -19,7 +19,7 @@ A **task** is a single goal a player works toward inside a quest. It gains **XP*
 
 ## Naming and IDs
 
-The file name without `.yml` is the task ID; it's what quests and placeholders use to reference the task. Items referenced anywhere in the file use the [Item Lookup System](https://plugins.auxilor.io/the-item-lookup-system).
+The file name without `.yml` is the task ID; it's what quests and placeholders use to reference the task. Items referenced anywhere in the file use the [Item Lookup System](https://hub.auxilor.io/wiki/eco/the-item-lookup-system-the-item-lookup-system).
 
 :::warning ID rules
 IDs may only contain lowercase letters, numbers, and underscores (a-z, 0-9, _). No spaces, capitals, or hyphens, or the task will not load.
@@ -90,8 +90,8 @@ on-complete: # Optional; effects run when a player completes the task
 :::danger Effects are their own system
 `on-complete` runs on the effect and condition system, which is shared across every eco plugin and documented separately.
 
-- [Configuring an Effect](https://plugins.auxilor.io/effects/configuring-an-effect)
-- [Configuring an Effect Chain](https://plugins.auxilor.io/effects/configuring-a-chain)
+- [Configuring an Effect](https://hub.auxilor.io/wiki/libreforge/configuring-an-effect)
+- [Configuring an Effect Chain](https://hub.auxilor.io/wiki/libreforge/configuring-a-chain)
 :::
 
 ## Internal placeholders
