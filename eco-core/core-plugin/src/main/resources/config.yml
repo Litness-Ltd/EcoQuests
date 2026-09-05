@@ -98,6 +98,12 @@ completed-gui:
       column: 4
       row: 6
 scan-interval: -1
+
+# The default maximum number of active quests a player can have at once.
+# -1 means unlimited.
+# Override per-player or per-group with ecoquests.quests.max.<number> permission.
+max-active-quests: -1
+
 gui:
   click-to-start: true
   next-page:

@@ -18,6 +18,11 @@ use-local-storage: false
 
 scan-interval: 20 # How often to scan for quests auto-starting (in ticks)
 
+# The default maximum number of active quests a player can have at once.
+# -1 means unlimited.
+# Override per-player or per-group with ecoquests.quests.max.<number> permission.
+max-active-quests: -1
+
 gui:
   title: "Quest Book (Page %page%/%max_page%)" # Title of the /quests GUI. Supports %page% and %max_page% placeholders
 
@@ -43,6 +48,7 @@ gui:
       - "111111111"
 
   quest-info: # The book icon summarising the player's quest progress
+    enabled: true # If false, hides this icon (and access to the completed-quests GUI)
     item: writable_book # Icon material
     name: "&fQuest Book" # Icon display name
     lore: # Icon lore; supports placeholders

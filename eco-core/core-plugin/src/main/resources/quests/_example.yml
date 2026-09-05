@@ -14,14 +14,32 @@ category: easy # The ID of a category file in /categories/; omit if not using ca
 gui:
   enabled: true # If the quest should be shown in the GUI
   always: false # If the quest should always be in the GUI, even if it's not started
+  show-completed: false # If the quest should stay in this slot after completion (instead of only showing in the completed-quests GUI)
   # The item to show in the GUI, read https://hub.auxilor.io/wiki/eco/the-item-lookup-system-the-item-lookup-system
   item: paper
+
+  # Optional. Pins this quest to an exact slot in the /quests GUI instead of
+  # letting it auto-place. Coordinates are absolute menu coordinates, and must
+  # fall within gui.quest-area in config.yml. Uncomment to use:
+  # position:
+  #   page: 1
+  #   row: 2
+  #   column: 2
 
 # How many minutes between this quest being reset (set to -1 to disable)
 # 1 Day: 1440
 # 1 Week: 10080
 # 1 Month: 43200
 reset-time: -1
+
+# Optional: reset at a fixed calendar time instead of counting from the last reset.
+# When present and valid, this takes priority over reset-time.
+# The timezone is optional and defaults to the server's timezone.
+# reset-schedule:
+#   type: daily # daily, weekly, or monthly
+#   time: "06:00" # 24-hour HH:mm
+#   day: monday # Weekly: weekday name. Monthly: day of month from 1 to 31
+#   timezone: "Europe/London" # IANA timezone
 
 # A list of tasks and their XP requirements to complete this quest.
 # If the task is one action, set XP to 1.

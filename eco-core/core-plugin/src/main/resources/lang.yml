@@ -3,7 +3,7 @@ messages:
   no-permission: "&cYou don't have permission to do this!"
   not-player: "&cThis command must be run by a player"
   invalid-command: "&cUnknown subcommand!"
-  reloaded: "Reloaded in %time%ms! Loaded %quests% quests, and %tasks% tasks."
+  reloaded: "Reloaded in %time%ms! Loaded %quests% quests and %tasks% tasks."
 
   invalid-player: "&cInvalid player!"
   invalid-quest: "&cInvalid quest!"
@@ -13,6 +13,7 @@ messages:
   started-quest-self: "&aYou started the &f%quest% &aquest!"
   cannot-start-conditions: "&cYou don't meet the requirements to start this quest!"
   cannot-start-completed: "&cYou've already completed this quest!"
+  max-active-quests: "&cYou have reached the maximum number of active quests!"
 
   started-quest: "&fStarted the &a%quest% &fquest for &a%player%&f!"
   reset-quest-for-player: "&fReset the &a%quest% &fquest for &a%player%&f!"
